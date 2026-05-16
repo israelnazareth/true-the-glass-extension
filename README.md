@@ -66,4 +66,4 @@ O elemento de bloqueio é **ocultado via CSS** em vez de removido do DOM — iss
 
 ## Aviso legal
 
-Este projeto é disponibilizado para fins educacionais. O uso pode violar os [Termos de Serviço do Glassdoor](https://www.glassdoor.com.br/termos.htm). Use por sua conta e risco.
+Este projeto é disponibilizado para fins educacionais. O uso pode violar os [Termos de Serviço do Glassdoor](https://www.glassdoor.com.br/sobre/terms/). Use por sua conta e risco.
