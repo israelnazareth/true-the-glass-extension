@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>True the Glass</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0d0f12;
+      --surface: #161a20;
+      --border: #252a33;
+      --accent: #00d26a;
+      --accent-dim: #00d26a22;
+      --accent-off: #ff4d6d;
+      --accent-off-dim: #ff4d6d22;
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --mono: 'Space Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    body {
+      width: 280px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .header {
+      padding: 16px 18px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo svg {
+      width: 16px;
+      height: 16px;
+      fill: #0d0f12;
+    }
+
+    .header-text h1 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+
+    .header-text span {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Main toggle card ── */
+    .card {
+      margin: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: border-color 0.3s;
+    }
+
+    .card.active {
+      border-color: var(--accent);
+    }
+
+    .card.inactive {
+      border-color: var(--border);
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toggle-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Toggle switch */
+    .switch {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #2a2f3a;
+      border-radius: 24px;
+      transition: background 0.25s;
+    }
+
+    .slider::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: var(--muted);
+      border-radius: 50%;
+      transition: transform 0.25s, background 0.25s;
+    }
+
+    input:checked+.slider {
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+    }
+
+    input:checked+.slider::before {
+      transform: translateX(18px);
+      background: var(--accent);
+    }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      transition: all 0.3s;
+    }
+
+    .status-badge.on {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .status-badge.off {
+      background: var(--accent-off-dim);
+      color: var(--accent-off);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.8s infinite;
+    }
+
+    .status-badge.off .dot {
+      animation: none;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    /* ── Info list ── */
+    .info {
+      margin: 0 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .info-item .icon {
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer span {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .domain-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      background: #1e2329;
+      color: #4a9eff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #252a33;
+    }
+
+    /* not-glassdoor notice */
+    .notice {
+      margin: 0 14px 14px;
+      padding: 10px 12px;
+      background: #1a1208;
+      border: 1px solid #3d2e0a;
+      border-radius: 8px;
+      font-size: 11px;
+      color: #c9a84c;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>True the Glass</h1>
+      <span>v1.0.0 &nbsp;·&nbsp; Manifest v3</span>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <div class="card" id="toggle-card">
+      <div class="toggle-row">
+        <span class="toggle-label">Ativar extensão</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="status-badge off" id="status-badge">
+        <span class="dot"></span>
+        <span id="status-text">INATIVO</span>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="info-item">
+        <span class="icon">✦</span>
+        <span>Remove o banner <code>#LapsedContentHardsell</code></span>
+      </div>
+      <div class="info-item">
+        <span class="icon">✦</span>
+        <span>Restaura o scroll desbloqueando <code>position: fixed</code> do body</span>
+      </div>
+      <div class="info-item">
+        <span class="icon">✦</span>
+        <span>Observa mudanças dinâmicas via MutationObserver</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="notice-content" style="display:none">
+    <div class="notice">
+      ⚠️ Esta extensão só age em páginas do <strong>glassdoor.com.br</strong>. Navegue até uma página do site para usar.
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Domínio</span>
+    <span class="domain-tag">glassdoor.com.br</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

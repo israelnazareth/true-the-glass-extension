@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "True the Glass",
+  "description": "Remove o paywall e o bloqueio de scroll do site 'porta de vidro'",
+  "version": "1.0.0",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.glassdoor.com.br/*",
+    "*://*.glassdoor.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "192": "assets/icons/icon-192.png",
+      "512": "assets/icons/icon-512.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.glassdoor.com.br/*",
+        "*://*.glassdoor.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "192": "assets/icons/icon-192.png",
+    "512": "assets/icons/icon-512.png"
+  }
+}
