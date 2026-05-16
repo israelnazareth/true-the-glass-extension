@@ -31,7 +31,10 @@ O elemento de bloqueio é **ocultado via CSS** em vez de removido do DOM — iss
 
 > A extensão não está disponível na Chrome Web Store. Instale manualmente pelo modo desenvolvedor.
 
-1. Baixe ou clone este repositório
+1. Baixe ou clone este repositório para o seu computador:
+    - Clique no botão verde "Code" e depois em "Download ZIP"
+    - Extraia o arquivo ZIP para uma pasta de sua escolha
+    - Ou, se preferir usar Git, execute `git clone https://github.com/israelnazareth/true-the-glass.git`
 2. Abra `chrome://extensions` no navegador
 3. Ative o **Modo do desenvolvedor** (canto superior direito)
 4. Clique em **"Carregar sem compactação"**
